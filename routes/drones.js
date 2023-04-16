@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const Drone = require('../models/Drone.model');
+const Drone = require('../models/Drone.model.js');
 
 router.get('/', (req, res, next) => {
   Drone.find()
-    .then((droneFromDb) => {
+    .then((drones) => {
       res.render("drones/list", {
-        droneFromDb
-      })
-        .catch((error) => {
-          console.log("il y a eu une erreur", error);
-          next(error);
-        });
+        drones
+      }
+      );
     })
+    .catch((error) => {
+      console.log("il y a eu une erreur", error);
+      next(error);
+    });
 });
 
 router.get('/drones/create', (req, res, next) => {
